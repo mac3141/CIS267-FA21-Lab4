@@ -1,4 +1,24 @@
 const pokemon_count = 20;
+const typeColors = {
+    fire: '#FEAC72',
+    grass: '#B6DA81',
+    electric: '#F4E47C',
+    water: '#73ADD3',
+    ground: '#C6B56C',
+    rock: '#D5B834',
+    fairy: '#FEEBF9',
+    poison: '#D0A9DB',
+    bug: '#92BF5F',
+    dragon: '#9D75FA',
+    psychic: '#F7A1D3',
+    flying: '#7BDAF4',
+    fighting: '#E59461',
+    normal: '#C9CDCF',
+    ice: '#93DBF0',
+    ghost: '#9E8BBB',
+    dark: '#8F8F8F',
+    steel: '#C4D3D4'
+};
 
 const app = Vue.createApp({
     data() {
@@ -53,7 +73,18 @@ const app = Vue.createApp({
             else {
                 return `${pokemon.types[0].type.name}`;
             }
-        }
+        },
+        // FIXME: ITS BROKE
+        // pokemonColorStyle(pokemon) {
+        //     // return style string => linear-gradient(30deg, color1 50%, color2 50%)
+        //     if (pokemon.types.length > 1) {
+        //         // let colors = [typeColors[pokemon.types[0].type], typeColors[pokemon.types[1].type]];
+        //         return `linear-gradient(30deg, ${typeColors[pokemon.types[0].type.name]} 50%, ${typeColors[pokemon.types[1].type.name]} 50%)`;
+        //     }
+        //     else {
+        //         return typeColors[pokemon.types[0].type.name];
+        //     }
+        // }
     }
 }).mount("#app");
 
