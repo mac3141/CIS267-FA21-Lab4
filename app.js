@@ -1,4 +1,3 @@
-const pokemon_count = 20;
 const typeColors = {
     fire: '#FEAC72',
     grass: '#B6DA81',
@@ -20,6 +19,15 @@ const typeColors = {
     steel: '#C4D3D4'
 };
 
+async function getPokemonData(id) {
+    // get an individual pokemon
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+}
+
 const app = Vue.createApp({
     data() {
         return {
@@ -30,29 +38,28 @@ const app = Vue.createApp({
         }
     },
     methods: {
-        // async loadAllPokemon() {
-        //     // load all Pokemon from API and save to allPokemon
-        //     await fetchAllPokemon();
-        //     renderPokemon(allPokemon);
-        // },
-        async fetchAllPokemon() {
+        async loadPokemon() {
             // load all Pokemon from API and save to allPokemon
+            const pokemon_count = 100;
+            const pokemonArray = [];
             for (let i = 1; i <= pokemon_count; i++) {
-                let pokemon = await this.getPokemonData(i);
-                // let species = await getPokemonSpecies(i);
-                pokemon.isFavorite = false;
-                // pokemon.isLegendary = species.is_legendary;
-                this.allPokemon.push(pokemon);
+                let pokemon = await getPokemonData(i);
+                // pokemon.inParty = false;
+                pokemonArray.push(pokemon);
             }
-        },
-        async getPokemonData(id) {
-            // get an individual pokemon
-            const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-            const response = await fetch(url);
-            const data = await response.json();
 
-            return data;
+            pokemonArray.forEach(pokemon => {
+                this.allPokemon.push(pokemon);
+            });
         },
+        // async getPokemonData(id) {
+        //     // get an individual pokemon
+        //     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+        //     const response = await fetch(url);
+        //     const data = await response.json();
+
+        //     return data;
+        // },
         // async renderPokemon(pokemonArray) {
         //     // render an array of pokemon objects as cards
         //     pokemonArray.forEach(pokemon => createPokemonCard(pokemon));
@@ -62,9 +69,17 @@ const app = Vue.createApp({
         },
         addPokemonToParty(pokemon) {
             // add to partyPokemon
+            pokemon.guid = this.getGUID();
+            console.log(pokemon.guid);
+            this.partyPokemon.push(pokemon);
         },
         removePokemonFromParty(pokemon) {
             // remove from partyPokemon
+            this.partyPokemon = this.partyPokemon.filter(p => p.guid!=pokemon.guid);
+        },
+        clearParty() {
+            // empty party
+            this.partyPokemon = [];
         },
         pokemonTypeString(pokemon) {
             if (pokemon.types.length > 1) {
@@ -77,7 +92,6 @@ const app = Vue.createApp({
         // I FIXED IT
         pokemonColorStyle(pokemon) {
             if (pokemon.types.length > 1) {
-                // let colors = [typeColors[pokemon.types[0].type], typeColors[pokemon.types[1].type]];
                 return {
                     background: `linear-gradient(30deg, ${typeColors[pokemon.types[0].type.name]} 50%, ${typeColors[pokemon.types[1].type.name]} 50%)`
                 }
@@ -87,8 +101,12 @@ const app = Vue.createApp({
                     background: typeColors[pokemon.types[0].type.name]
                 }
             }
+        },
+        getGUID() {
+            return Math.floor(Math.random() * 100000);
         }
+    },
+    mounted() {
+        this.loadPokemon();
     }
 }).mount("#app");
-
-app.fetchAllPokemon();

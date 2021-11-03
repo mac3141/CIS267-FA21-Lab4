@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;800&display=swap');
 
 body {
-  background: #efefbb;
-  background: linear-gradient(to right, #d4d3dd, #efefbb);
+  /* background: #efefbb;
+  background: linear-gradient(to right, #d4d3dd, #efefbb); */
   font-family: 'Lato', sans-serif;
   display: flex;
   flex-direction: column;
@@ -16,8 +16,12 @@ h1 {
   letter-spacing: 3px;
 }
 
+h3 {
+  font-weight: bold;
+}
+
 footer {
-  position: sticky;
+  position: relative;
   bottom: 0;
   padding: 5px;
   width: 100%;
@@ -94,16 +98,15 @@ footer {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.5);
   font-size: 1.5em;
+  font-weight: bold;
   transition: 0.2s;
+}
+
+.favorite a:hover {
+  color: #F52F07;
 }
 
 .filter {
   display: flex;
   padding: 10px;
-}
-
-#sort-by {
-  padding: 0px 10px 0px 0px;
-  font-weight: bold;
-  font-size: small;
 }

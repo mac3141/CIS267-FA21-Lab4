@@ -16,7 +16,7 @@
 
 <body>
 
-    <div class="container" id="app">
+    <div class="container-fluid" id="app">
 
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,45 +24,69 @@
                 <a class="navbar-brand" href="#">
                     <h1>Pokedex</h1>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">All</a>
+                            <a class="nav-link active" id="all" aria-current="page" href="#">All</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Favorites</a>
+                            <a class="nav-link" id="favorites" href="#">Favorites</a>
                         </li>
                     </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" id="searchInput" type="text" placeholder="Search by ID or name"
+                            aria-label="Search">
+                        <button class="btn btn-outline-secondary" id="searchButton" type="button">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
 
         <!-- Party -->
         <div id="party">
+            <h3>Party</h3>
+            <div class="poke-container">
+                <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon" @click="removePokemonFromParty(pokemon)">
+                    <!-- <div class="favorite"><a href="#" id="{{pokemon.id}}">&heartsuit;</a></div> -->
+                    <div class="img-container">
+                        <img :src="pokemon.sprites.other['official-artwork'].front_default" />
+                    </div>
+                    <div class="info">
+                        <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
+                        <h3 class="name">{{pokemon.name}}</h3>
+                        <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- All pokemon -->
-        <div class="poke-container">
-            <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon">
-                <!-- <div class="favorite"><a href="#" id="{{pokemon.id}}">&heartsuit;</a></div> -->
-                <div class="img-container">
-                    <img :src="pokemon.sprites.other['official-artwork'].front_default" />
-                </div>
-                <div class="info">
-                    <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
-                    <h3 class="name">{{pokemon.name}}</h3>
-                    <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+        <div id="party">
+            <h3>All Pokemon</h3>
+            <div class="poke-container">
+                <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
+                    @click="addPokemonToParty(pokemon)">
+                    <div class="favorite"><a href="#" id="{{pokemon.id}}">&heartsuit;</a></div>
+                    <div class="img-container">
+                        <img :src="pokemon.sprites.other['official-artwork'].front_default" />
+                    </div>
+                    <div class="info">
+                        <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
+                        <h3 class="name">{{pokemon.name}}</h3>
+                        <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <footer class="bg-light">
+    <footer>
         &copy; 2021
     </footer>
 
