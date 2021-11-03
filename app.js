@@ -74,17 +74,20 @@ const app = Vue.createApp({
                 return `${pokemon.types[0].type.name}`;
             }
         },
-        // FIXME: ITS BROKE
-        // pokemonColorStyle(pokemon) {
-        //     // return style string => linear-gradient(30deg, color1 50%, color2 50%)
-        //     if (pokemon.types.length > 1) {
-        //         // let colors = [typeColors[pokemon.types[0].type], typeColors[pokemon.types[1].type]];
-        //         return `linear-gradient(30deg, ${typeColors[pokemon.types[0].type.name]} 50%, ${typeColors[pokemon.types[1].type.name]} 50%)`;
-        //     }
-        //     else {
-        //         return typeColors[pokemon.types[0].type.name];
-        //     }
-        // }
+        // I FIXED IT
+        pokemonColorStyle(pokemon) {
+            if (pokemon.types.length > 1) {
+                // let colors = [typeColors[pokemon.types[0].type], typeColors[pokemon.types[1].type]];
+                return {
+                    background: `linear-gradient(30deg, ${typeColors[pokemon.types[0].type.name]} 50%, ${typeColors[pokemon.types[1].type.name]} 50%)`
+                }
+            }
+            else {
+                return {
+                    background: typeColors[pokemon.types[0].type.name]
+                }
+            }
+        }
     }
 }).mount("#app");
 

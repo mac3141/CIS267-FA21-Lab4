@@ -20,6 +20,8 @@ footer {
   position: sticky;
   bottom: 0;
   padding: 5px;
+  width: 100%;
+  text-align: center;
 }
 
 .poke-container {
