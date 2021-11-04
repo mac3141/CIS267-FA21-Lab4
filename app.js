@@ -52,18 +52,6 @@ const app = Vue.createApp({
                 this.allPokemon.push(pokemon);
             });
         },
-        // async getPokemonData(id) {
-        //     // get an individual pokemon
-        //     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-        //     const response = await fetch(url);
-        //     const data = await response.json();
-
-        //     return data;
-        // },
-        // async renderPokemon(pokemonArray) {
-        //     // render an array of pokemon objects as cards
-        //     pokemonArray.forEach(pokemon => createPokemonCard(pokemon));
-        // },
         filterPokemon() {
             // set filteredPokemon to matching pokemon based on search query
         },

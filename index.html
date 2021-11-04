@@ -49,7 +49,7 @@
 
         <!-- Party -->
         <div id="party">
-            <h3>Party</h3>
+            <h4>Party</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon" @click="removePokemonFromParty(pokemon)">
                     <!-- <div class="favorite"><a href="#" id="{{pokemon.id}}">&heartsuit;</a></div> -->
@@ -67,7 +67,7 @@
 
         <!-- All pokemon -->
         <div id="party">
-            <h3>All Pokemon</h3>
+            <h4>All Pokemon</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
                     @click="addPokemonToParty(pokemon)">

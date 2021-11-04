@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;800&display=swap');
 
 body {
   /* background: #efefbb;
   background: linear-gradient(to right, #d4d3dd, #efefbb); */
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,9 +14,10 @@ body {
 
 h1 {
   letter-spacing: 3px;
+  font-weight: 800;
 }
 
-h3 {
+h4 {
   font-weight: bold;
 }
 
@@ -91,7 +92,7 @@ footer {
 .pokemon .info small {
   font-size: 0.7em;
   text-transform: capitalize;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 .favorite a {
