@@ -104,6 +104,11 @@ const app = Vue.createApp({
             return Math.floor(Math.random() * 100000);
         }
     },
+    computed: {
+        filteredPokemonIsEmpty() {
+            return this.filteredPokemon.length == 0;
+        }
+    },
     mounted() {
         this.loadPokemon();
     }

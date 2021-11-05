@@ -24,26 +24,11 @@
                 <a class="navbar-brand" href="#">
                     <h1>Pokedex</h1>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="all" aria-current="page" href="#">All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="favorites" href="#">Favorites</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" id="searchInput" type="text" placeholder="Search by ID or name"
-                            aria-label="Search">
-                        <button class="btn btn-outline-secondary" id="searchButton" type="button">Search</button>
-                    </form>
-                </div>
+                <form class="d-flex">
+                    <input class="form-control me-2" id="searchInput" type="text" placeholder="ID, name, or type"
+                        aria-label="Search">
+                    <button class="btn btn-outline-secondary" id="searchButton" type="button">Search</button>
+                </form>
             </div>
         </nav>
 
@@ -51,7 +36,8 @@
         <div id="party">
             <h4>Party</h4>
             <div class="poke-container">
-                <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon" @click="removePokemonFromParty(pokemon)">
+                <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon"
+                    @click="removePokemonFromParty(pokemon)">
                     <div class="img-container">
                         <img :src="pokemon.sprites.other['official-artwork'].front_default" />
                     </div>
@@ -65,7 +51,7 @@
         </div>
 
         <!-- All pokemon -->
-        <div id="all">
+        <div id="all" v-show="filteredPokemonIsEmpty">
             <h4>All Pokemon</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
@@ -83,7 +69,7 @@
         </div>
 
         <!-- Filtered -->
-        <!-- <div id="filtered">
+        <div id="filtered" v-show="!filteredPokemonIsEmpty">
             <h4>Search results:</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in filteredPokemon"
@@ -98,7 +84,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
     </div>
 
