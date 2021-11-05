@@ -54,6 +54,16 @@ const app = Vue.createApp({
         },
         filterPokemon() {
             // set filteredPokemon to matching pokemon based on search query
+            const searchInput = document.getElementById("searchInput");
+            const searchQuery = searchInput.value;
+            console.log(searchQuery);
+
+            // search by name, id, or type
+            this.filteredPokemon = allPokemon.filter(pokemon => {
+                if (pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) || pokemon.id.toString().includes(searchQuery) || this.pokemonTypeString(pokemon).includes(searchQuery)) {
+                    return true;
+                }
+            });
         },
         addPokemonToParty(pokemon) {
             // add to partyPokemon
@@ -63,7 +73,7 @@ const app = Vue.createApp({
         },
         removePokemonFromParty(pokemon) {
             // remove from partyPokemon
-            this.partyPokemon = this.partyPokemon.filter(p => p.guid!=pokemon.guid);
+            this.partyPokemon = this.partyPokemon.filter(p => p.guid != pokemon.guid);
         },
         clearParty() {
             // empty party

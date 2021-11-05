@@ -52,7 +52,6 @@
             <h4>Party</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon" @click="removePokemonFromParty(pokemon)">
-                    <!-- <div class="favorite"><a href="#" id="{{pokemon.id}}">&heartsuit;</a></div> -->
                     <div class="img-container">
                         <img :src="pokemon.sprites.other['official-artwork'].front_default" />
                     </div>
@@ -66,12 +65,11 @@
         </div>
 
         <!-- All pokemon -->
-        <div id="party">
+        <div id="all">
             <h4>All Pokemon</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
                     @click="addPokemonToParty(pokemon)">
-                    <div class="favorite"><a href="#" id="{{pokemon.id}}">&heartsuit;</a></div>
                     <div class="img-container">
                         <img :src="pokemon.sprites.other['official-artwork'].front_default" />
                     </div>
@@ -83,6 +81,24 @@
                 </div>
             </div>
         </div>
+
+        <!-- Filtered -->
+        <!-- <div id="filtered">
+            <h4>Search results:</h4>
+            <div class="poke-container">
+                <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in filteredPokemon"
+                    @click="addPokemonToParty(pokemon)">
+                    <div class="img-container">
+                        <img :src="pokemon.sprites.other['official-artwork'].front_default" />
+                    </div>
+                    <div class="info">
+                        <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
+                        <h3 class="name">{{pokemon.name}}</h3>
+                        <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
     </div>
 

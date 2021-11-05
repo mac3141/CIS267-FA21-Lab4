@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Mohave:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;800&display=swap');
 
 body {
   /* background: #efefbb;
   background: linear-gradient(to right, #d4d3dd, #efefbb); */
-  font-family: 'Inter', sans-serif;
+  font-family: 'Mohave', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +16,7 @@ body {
 
 h1 {
   letter-spacing: 3px;
-  font-weight: 800;
+  font-weight: bold;
 }
 
 h4 {
@@ -93,18 +95,6 @@ footer {
   font-size: 0.7em;
   text-transform: capitalize;
   font-weight: 300;
-}
-
-.favorite a {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.5em;
-  font-weight: bold;
-  transition: 0.2s;
-}
-
-.favorite a:hover {
-  color: #F52F07;
 }
 
 .filter {
