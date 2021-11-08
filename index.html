@@ -26,8 +26,8 @@
                 </a>
                 <form class="d-flex">
                     <input class="form-control me-2" id="searchInput" type="text" placeholder="ID, name, or type"
-                        aria-label="Search">
-                    <button class="btn btn-outline-secondary" id="searchButton" type="button">Search</button>
+                        aria-label="Search" @keyup="filterPokemon">
+                    <button class="btn btn-outline-secondary" id="searchButton" type="button" @click="filterPokemon">Search</button>
                 </form>
             </div>
         </nav>

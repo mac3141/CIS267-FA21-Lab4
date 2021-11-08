@@ -59,11 +59,15 @@ const app = Vue.createApp({
             console.log(searchQuery);
 
             // search by name, id, or type
-            this.filteredPokemon = allPokemon.filter(pokemon => {
-                if (pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) || pokemon.id.toString().includes(searchQuery) || this.pokemonTypeString(pokemon).includes(searchQuery)) {
+            this.filteredPokemon = this.allPokemon.filter(pokemon => {
+                if (searchQuery == "") {
+                    this.filteredPokemon = [];
+                }
+                else if (pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) || pokemon.id.toString().includes(searchQuery) || this.pokemonTypeString(pokemon).includes(searchQuery)) {
                     return true;
                 }
             });
+            console.log(this.filteredPokemon);
         },
         addPokemonToParty(pokemon) {
             // add to partyPokemon
@@ -71,6 +75,7 @@ const app = Vue.createApp({
             console.log(pokemon.guid);
             this.partyPokemon.push(pokemon);
         },
+        // FIXME: Handle duplicates
         removePokemonFromParty(pokemon) {
             // remove from partyPokemon
             this.partyPokemon = this.partyPokemon.filter(p => p.guid != pokemon.guid);
