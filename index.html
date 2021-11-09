@@ -27,15 +27,21 @@
                 <form class="d-flex">
                     <input class="form-control me-2" id="searchInput" type="text" placeholder="ID, name, or type"
                         aria-label="Search" @keyup="filterPokemon">
-                    <button class="btn btn-outline-secondary" id="searchButton" type="button" @click="filterPokemon">Search</button>
+                    <button class="btn btn-outline-secondary" id="searchButton" type="button"
+                        @click="filterPokemon">Search</button>
                 </form>
             </div>
         </nav>
 
         <!-- Party -->
-        <div id="party">
-            <h4>Party</h4>
-            <div class="party-container" v-show="partyPokemonIsEmpty">Party is empty. Click a pokemon to add to your party.</div>
+        <div class="mt-2" id="party">
+            <h4>Party
+                <span v-show="partyIsFull"> (full) </span>
+                <button type="button" class="btn btn-secondary btn-sm" v-show="!partyPokemonIsEmpty"
+                    @click="clearParty">Clear Party</button>
+            </h4>
+            <div class="party-container" v-show="partyPokemonIsEmpty">Party is empty. Click on a pokemon to add to your
+                party.</div>
             <div class="party-container" id="subParty">
                 <div class="pokemon" id="partyCards" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon"
                     @click="removePokemonFromParty(pokemon)">
@@ -52,7 +58,7 @@
         </div>
 
         <!-- All pokemon -->
-        <div id="all" v-show="filteredPokemonIsEmpty">
+        <div class="mt-2" id="all" v-show="filteredPokemonIsEmpty">
             <h4>All Pokemon</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
@@ -70,7 +76,7 @@
         </div>
 
         <!-- Filtered -->
-        <div id="filtered" v-show="!filteredPokemonIsEmpty">
+        <div class="mt-2" id="filtered" v-show="!filteredPokemonIsEmpty">
             <h4>Search results:</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in filteredPokemon"

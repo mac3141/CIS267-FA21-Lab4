@@ -70,7 +70,12 @@ const app = Vue.createApp({
         },
         addPokemonToParty(pokemon) {
             // add to partyPokemon
-            this.partyPokemon.push(pokemon);
+            if (this.partyPokemon.length < this.maxPartySize) {
+                this.partyPokemon.push(pokemon);
+            }
+            else {
+                alert("Party is full. Remove Pokemon to add more.");
+            }
         },
         removePokemonFromParty(pokemon) {
             // remove from partyPokemon
@@ -111,6 +116,9 @@ const app = Vue.createApp({
         },
         partyPokemonIsEmpty() {
             return this.partyPokemon.length == 0;
+        },
+        partyIsFull() {
+            return this.partyPokemon.length == 6;
         }
     },
     mounted() {
