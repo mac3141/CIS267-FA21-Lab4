@@ -58,7 +58,7 @@
         </div>
 
         <!-- All pokemon -->
-        <div class="mt-2" id="all" v-show="filteredPokemonIsEmpty">
+        <div class="mt-2" id="all" v-show="searchIsEmpty">
             <h4>All Pokemon</h4>
             <div class="poke-container">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
@@ -76,9 +76,10 @@
         </div>
 
         <!-- Filtered -->
-        <div class="mt-2" id="filtered" v-show="!filteredPokemonIsEmpty">
+        <div class="mt-2" id="filtered" v-show="!searchIsEmpty">
             <h4>Search results:</h4>
-            <div class="poke-container">
+            <div class="poke-container" v-show="filteredPokemonIsEmpty">No results.</div>
+            <div class="poke-container" v-show="!filteredPokemonIsEmpty">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in filteredPokemon"
                     @click="addPokemonToParty(pokemon)">
                     <div class="img-container">

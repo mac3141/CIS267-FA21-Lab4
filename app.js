@@ -34,7 +34,8 @@ const app = Vue.createApp({
             allPokemon: [],
             partyPokemon: [],
             filteredPokemon: [],
-            maxPartySize: 6
+            maxPartySize: 6,
+            searchIsEmpty: true
         }
     },
     methods: {
@@ -60,9 +61,14 @@ const app = Vue.createApp({
             // search by name, id, or type
             this.filteredPokemon = this.allPokemon.filter(pokemon => {
                 if (searchQuery == "") {
+                    this.searchIsEmpty = true;
                     this.filteredPokemon = [];
                 }
+                else if (!(pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) || pokemon.id.toString().includes(searchQuery) || this.pokemonTypeString(pokemon).includes(searchQuery))) {
+                    this.searchIsEmpty = false;
+                }
                 else if (pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) || pokemon.id.toString().includes(searchQuery) || this.pokemonTypeString(pokemon).includes(searchQuery)) {
+                    this.searchIsEmpty = false;
                     return true;
                 }
             });
