@@ -35,7 +35,7 @@
         <!-- Party -->
         <div id="party">
             <h4>Party</h4>
-            <div class="poke-container">
+            <div class="poke-container" id="party">
                 <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon"
                     @click="removePokemonFromParty(pokemon)">
                     <div class="img-container">
