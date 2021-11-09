@@ -44,7 +44,6 @@ const app = Vue.createApp({
             const pokemonArray = [];
             for (let i = 1; i <= pokemon_count; i++) {
                 let pokemon = await getPokemonData(i);
-                // pokemon.inParty = false;
                 pokemonArray.push(pokemon);
             }
 
@@ -71,14 +70,11 @@ const app = Vue.createApp({
         },
         addPokemonToParty(pokemon) {
             // add to partyPokemon
-            pokemon.guid = this.getGUID();
-            console.log(pokemon.guid);
             this.partyPokemon.push(pokemon);
         },
-        // FIXME: Handle duplicates
         removePokemonFromParty(pokemon) {
             // remove from partyPokemon
-            this.partyPokemon = this.partyPokemon.filter(p => p.guid != pokemon.guid);
+            this.partyPokemon.splice(this.partyPokemon.indexOf(pokemon), 1);
         },
         clearParty() {
             // empty party
@@ -112,6 +108,9 @@ const app = Vue.createApp({
     computed: {
         filteredPokemonIsEmpty() {
             return this.filteredPokemon.length == 0;
+        },
+        partyPokemonIsEmpty() {
+            return this.partyPokemon.length == 0;
         }
     },
     mounted() {
