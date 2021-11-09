@@ -35,7 +35,7 @@
 
         <!-- Party -->
         <div class="mt-2" id="party">
-            <h4>Party
+            <h4>Party - {{partyPokemon.length}}
                 <span v-show="partyIsFull"> (full) </span>
                 <button type="button" class="btn btn-secondary btn-sm" v-show="!partyPokemonIsEmpty"
                     @click="clearParty">Clear Party</button>

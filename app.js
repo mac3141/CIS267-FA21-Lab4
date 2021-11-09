@@ -105,9 +105,6 @@ const app = Vue.createApp({
                     background: typeColors[pokemon.types[0].type.name]
                 }
             }
-        },
-        getGUID() {
-            return Math.floor(Math.random() * 100000);
         }
     },
     computed: {
