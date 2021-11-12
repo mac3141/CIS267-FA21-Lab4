@@ -18,77 +18,80 @@
 
     <div class="container-fluid" id="app">
 
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <h1>Pokedex</h1>
-                </a>
-                <form class="d-flex">
-                    <input class="form-control me-2" id="searchInput" type="text" placeholder="ID, name, or type"
-                        aria-label="Search" @keyup="filterPokemon">
-                    <button class="btn btn-outline-secondary" id="searchButton" type="button"
-                        @click="filterPokemon">Search</button>
-                </form>
-            </div>
-        </nav>
+        <div class="top">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <h1>Pokedex</h1>
+                    </a>
+                    <form class="d-flex">
+                        <input class="form-control me-2" id="searchInput" type="text" placeholder="ID, name, or type"
+                            aria-label="Search" @keyup="filterPokemon">
+                        <button class="btn btn-outline-secondary" id="searchButton" type="button"
+                            @click="filterPokemon">Search</button>
+                    </form>
+                </div>
+            </nav>
 
-        <!-- Party -->
-        <div class="mt-2" id="party">
-            <h4>Party - {{partyPokemon.length}}
-                <span v-show="partyIsFull"> (full) </span>
-                <button type="button" class="btn btn-secondary btn-sm" v-show="!partyPokemonIsEmpty"
-                    @click="clearParty">Clear Party</button>
-            </h4>
-            <div class="party-container" v-show="partyPokemonIsEmpty">Party is empty. Click on a pokemon to add to your
-                party.</div>
-            <div class="party-container" id="subParty">
-                <div class="pokemon" id="partyCards" :style="pokemonColorStyle(pokemon)" v-for="pokemon in partyPokemon"
-                    @click="removePokemonFromParty(pokemon)">
-                    <div class="img-container">
-                        <img :src="pokemon.sprites.other['official-artwork'].front_default" />
-                    </div>
-                    <div class="info">
-                        <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
-                        <h3 class="name">{{pokemon.name}}</h3>
-                        <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+            <!-- Party -->
+            <div class="mt-2" id="party">
+                <h4>Party: {{partyPokemon.length}} of {{maxPartySize}}
+                    <span v-show="partyIsFull"> (full) </span>
+                    <button type="button" class="btn btn-secondary btn-sm" v-show="!partyPokemonIsEmpty"
+                        @click="clearParty">Clear Party</button>
+                </h4>
+                <div class="party-container" v-show="partyPokemonIsEmpty">Party is empty. Click on a pokemon to add to your party.</div>
+                <div class="party-container" id="subParty">
+                    <div class="pokemon" id="partyCards" :style="pokemonColorStyle(pokemon)"
+                        v-for="pokemon in partyPokemon" @click="removePokemonFromParty(pokemon)">
+                        <div class="img-container">
+                            <img :src="pokemon.sprites.other['official-artwork'].front_default" />
+                        </div>
+                        <div class="info">
+                            <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
+                            <h3 class="name">{{pokemon.name}}</h3>
+                            <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- All pokemon -->
-        <div class="mt-2" id="all" v-show="searchIsEmpty">
-            <h4>All Pokemon</h4>
-            <div class="poke-container">
-                <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
-                    @click="addPokemonToParty(pokemon)">
-                    <div class="img-container">
-                        <img :src="pokemon.sprites.other['official-artwork'].front_default" />
-                    </div>
-                    <div class="info">
-                        <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
-                        <h3 class="name">{{pokemon.name}}</h3>
-                        <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+        <div class="scroll-area">
+            <!-- All pokemon -->
+            <div class="mt-2" id="all" v-show="searchIsEmpty">
+                <h4>All Pokemon</h4>
+                <div class="poke-container">
+                    <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in allPokemon"
+                        @click="addPokemonToParty(pokemon)">
+                        <div class="img-container">
+                            <img :src="pokemon.sprites.other['official-artwork'].front_default" />
+                        </div>
+                        <div class="info">
+                            <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
+                            <h3 class="name">{{pokemon.name}}</h3>
+                            <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Filtered -->
-        <div class="mt-2" id="filtered" v-show="!searchIsEmpty">
-            <h4>Search results:</h4>
-            <div class="poke-container" v-show="filteredPokemonIsEmpty">No results.</div>
-            <div class="poke-container" v-show="!filteredPokemonIsEmpty">
-                <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in filteredPokemon"
-                    @click="addPokemonToParty(pokemon)">
-                    <div class="img-container">
-                        <img :src="pokemon.sprites.other['official-artwork'].front_default" />
-                    </div>
-                    <div class="info">
-                        <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
-                        <h3 class="name">{{pokemon.name}}</h3>
-                        <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+            <!-- Filtered -->
+            <div class="mt-2" id="filtered" v-show="!searchIsEmpty">
+                <h4>Search results:</h4>
+                <div class="poke-container" v-show="filteredPokemonIsEmpty">No results.</div>
+                <div class="poke-container" v-show="!filteredPokemonIsEmpty">
+                    <div class="pokemon" :style="pokemonColorStyle(pokemon)" v-for="pokemon in filteredPokemon"
+                        @click="addPokemonToParty(pokemon)">
+                        <div class="img-container">
+                            <img :src="pokemon.sprites.other['official-artwork'].front_default" />
+                        </div>
+                        <div class="info">
+                            <span class="number">#{{pokemon.id.toString().padStart(3, '0')}}</span>
+                            <h3 class="name">{{pokemon.name}}</h3>
+                            <small class="type">Type: <span>{{pokemonTypeString(pokemon)}}</span> </small>
+                        </div>
                     </div>
                 </div>
             </div>

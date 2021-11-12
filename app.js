@@ -119,9 +119,6 @@ const app = Vue.createApp({
         },
         partyPokemonIsEmpty() {
             return this.partyPokemon.length == 0;
-        },
-        partyIsFull() {
-            return this.partyPokemon.length == 6;
         }
     },
     mounted() {
